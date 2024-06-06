@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "CARE Backend.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bug-Bust3rs/CARE-Community-Aid-and-Resource-Exchange.git"
+  },
+  "keywords": [
+    "reactjs",
+    "expressjs",
+    "nodejs",
+    "postgresql",
+    "tailwindcss",
+    "prisma"
+  ],
+  "author": "Bug Busters",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bug-Bust3rs/CARE-Community-Aid-and-Resource-Exchange/issues"
+  },
+  "homepage": "https://github.com/Bug-Bust3rs/CARE-Community-Aid-and-Resource-Exchange#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
