@@ -6,6 +6,7 @@ import { sendEmail } from "../lib/emailService";
 import jwt from "jsonwebtoken";
 import { config } from "../config/config";
 import { createToken } from "../lib/tokenConfig";
+import { sendOTP } from "../lib/otpService";
 
 const prisma = new PrismaClient();
 
@@ -77,10 +78,41 @@ export const verifyEmail = async (req: Request, res: Response) => {
 
   await prisma.oTP.delete({ where: { id: verificationToken.id } });
 
-  res
-    .status(200)
-    .send({
+  res.status(200).send({
+    success: true,
+    message: "Verified User! Our frontend page will be ready soon!",
+  });
+};
+
+export const login = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw Error("All fields must be filled");
+  }
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      throw new Error("Invalid credentials");
+    }
+    if (!user.isVerified) {
+      await sendEmail(user.id);
+      return res.status(200).json({
+        success: true,
+        message: "At First Verify Your Email,A Verification email sent.",
+      });
+    }
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw new Error("Invalid credentials");
+    }
+    await sendOTP(user.id);
+
+    return res.status(200).json({
+      message: "OTP Send successfull!",
       success: true,
-      message: "Verified User! Our frontend page will be ready soon!",
     });
+  } catch (error) {
+    console.error("Login error:", error);
+    return res.status(500).json({ message: "Login failed.", success: false });
+  }
 };
