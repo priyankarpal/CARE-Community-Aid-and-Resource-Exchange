@@ -48,3 +48,39 @@ export const register = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const verifyEmail = async (req: Request, res: Response) => {
+  const { token } = req.query;
+  const { userId } = req.params;
+  if (!token || typeof token !== "string")
+    return res.status(400).send("Token not provided or invalid");
+
+  const verificationToken = await prisma.oTP.findFirst({
+    where: { otp: token },
+  });
+  if (!verificationToken)
+    return res.status(404).json({ success: false, message: "Invalid token" });
+
+  if (verificationToken.expiresAt < new Date())
+    return res
+      .status(400)
+      .json({ success: false, message: "Token has expired" });
+
+  if (verificationToken.authorId !== userId) {
+    return res.status(403).json({ success: false, message: "Unauthorized" });
+  }
+
+  await prisma.user.update({
+    where: { id: verificationToken.authorId },
+    data: { isVerified: true },
+  });
+
+  await prisma.oTP.delete({ where: { id: verificationToken.id } });
+
+  res
+    .status(200)
+    .send({
+      success: true,
+      message: "Verified User! Our frontend page will be ready soon!",
+    });
+};
