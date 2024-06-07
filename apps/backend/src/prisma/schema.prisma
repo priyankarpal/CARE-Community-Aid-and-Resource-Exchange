@@ -11,7 +11,7 @@ model User {
   id            String          @id @default(uuid())
   email         String          @unique
   name          String
-  phone         Int             @unique
+  phone         String             @unique
   isVerified    Boolean         @default(false)
   location      String?
   password      String
