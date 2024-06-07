@@ -14,6 +14,7 @@ model User {
   phone         Int             @unique
   isVerified    Boolean         @default(false)
   location      String?
+  password      String
   profiles      Profile[]
   jobPosts      JobPost[]
   petPosts      PetsPost[]
