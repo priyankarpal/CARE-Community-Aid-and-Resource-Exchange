@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id            String          @id @default(uuid())
   email         String          @unique
@@ -34,7 +33,7 @@ model Profile {
 }
 
 model JobPost {
-  id             Int      @id @default(autoincrement())
+  id            String      @id @default(uuid())
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   jobType        Service  @default(USER)
@@ -48,7 +47,7 @@ model JobPost {
 }
 
 model PetsPost {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   petType   Pet      @default(OTHERS)
   petImage  String?
   author    User     @relation(fields: [authorId], references: [id])
@@ -61,7 +60,7 @@ model PetsPost {
 }
 
 model DonationPosts {
-  id            Int      @id @default(autoincrement())
+  id            String      @id @default(uuid())
   donationType  Pet      @default(OTHERS)
   donationImage String?
   author        User     @relation(fields: [authorId], references: [id])
@@ -74,7 +73,7 @@ model DonationPosts {
 }
 
 model OTP {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   otp       String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
