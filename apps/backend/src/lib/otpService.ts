@@ -1,8 +1,8 @@
 import { randomInt } from "crypto";
-import { config } from "../config/config";
 import nodemailer from "nodemailer";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { config } from "../config/config";
+import prisma from "../config/prisma.config";
+
 
 export const generateOTP = (): string => {
   const otp = randomInt(100000, 1000000);
