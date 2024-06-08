@@ -1,14 +1,12 @@
-import { Request, Response } from "express";
+import { Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { Request, Response } from "express";
 import validator from "validator";
-import { Prisma, PrismaClient } from "@prisma/client";
+import prisma from "../config/prisma.config";
 import { sendEmail } from "../lib/emailService";
-import jwt from "jsonwebtoken";
-import { config } from "../config/config";
-import { createToken } from "../lib/tokenConfig";
 import { sendOTP } from "../lib/otpService";
+import { createToken } from "../lib/tokenConfig";
 
-const prisma = new PrismaClient();
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, phone } = req.body;
