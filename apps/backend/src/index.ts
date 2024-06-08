@@ -8,6 +8,7 @@ import CheckError from "./lib/checkError";
 import errorHandler from "./middleware/errorMiddleware";
 import authRoutes from "./routes/authRouter";
 import profileRoutes from "./routes/profileRoutes";
+import jobRoutes from './routes/jobRoutes'
 
 const app: Express = express();
 
@@ -18,6 +19,7 @@ app.use(limiter);
 
 app.use("/api/v0.1/auth", authRoutes);
 app.use("/api/v0.1/profiles", profileRoutes);
+app.use("/api/v0.1/job", jobRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ success: true });
