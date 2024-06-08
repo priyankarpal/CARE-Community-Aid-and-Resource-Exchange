@@ -1,8 +1,7 @@
-import { config } from "../config/config";
-import { v4 as uuidv4 } from "uuid";
-import { PrismaClient } from "@prisma/client";
 import nodemailer from "nodemailer";
-const prisma = new PrismaClient();
+import { v4 as uuidv4 } from "uuid";
+import { config } from "../config/config";
+import prisma from "../config/prisma.config";
 
 export const sendEmail = async (userId: string) => {
   const transporter = nodemailer.createTransport({
