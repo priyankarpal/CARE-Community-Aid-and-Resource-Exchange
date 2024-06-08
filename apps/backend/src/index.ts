@@ -7,6 +7,7 @@ import limiter from "./lib/rateLimitConfig";
 import CheckError from "./lib/checkError";
 import errorHandler from "./middleware/errorMiddleware";
 import authRoutes from "./routes/authRouter";
+import profileRoutes from "./routes/profileRoutes";
 
 const app: Express = express();
 
@@ -16,6 +17,7 @@ app.use(morgan("dev"));
 app.use(limiter);
 
 app.use("/api/v0.1/auth", authRoutes);
+app.use("/api/v0.1/profiles", profileRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ success: true });
