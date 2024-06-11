@@ -7,6 +7,10 @@ import limiter from "./lib/rateLimitConfig";
 import CheckError from "./lib/checkError";
 import errorHandler from "./middleware/errorMiddleware";
 import authRoutes from "./routes/authRouter";
+import profileRoutes from "./routes/profileRoutes";
+import jobRoutes from "./routes/jobRoutes";
+import petPostRoutes from "./routes/petPostRoutes";
+import donationPostRoutes from "./routes/donationPostsRoutes";
 
 const app: Express = express();
 
@@ -16,6 +20,10 @@ app.use(morgan("dev"));
 app.use(limiter);
 
 app.use("/api/v0.1/auth", authRoutes);
+app.use("/api/v0.1/profiles", profileRoutes);
+app.use("/api/v0.1/job", jobRoutes);
+app.use("/api/v0.1/petPosts", petPostRoutes);
+app.use("/api/v0.1/donationPosts", donationPostRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ success: true });

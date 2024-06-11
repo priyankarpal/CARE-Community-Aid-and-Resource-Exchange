@@ -15,7 +15,7 @@ model User {
   isVerified    Boolean         @default(false)
   location      String?
   password      String
-  profiles      Profile[]
+  profiles      Profile[] 
   jobPosts      JobPost[]
   petPosts      PetsPost[]
   donationPosts DonationPosts[]
@@ -61,7 +61,7 @@ model PetsPost {
 }
 
 model DonationPosts {
-  id            String      @id @default(uuid())
+  id            String   @id @default(uuid())
   donationType  Pet      @default(OTHERS)
   donationImage String?
   author        User     @relation(fields: [authorId], references: [id])

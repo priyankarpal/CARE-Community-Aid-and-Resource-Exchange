@@ -1,4 +1,4 @@
-import cors, { CorsOptions } from "cors";
+import { CorsOptions } from "cors";
 const whitelist = ["http://localhost:5173","https://caree.vercel.app"];
 
 const corsOptions: CorsOptions = {
