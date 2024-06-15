@@ -38,3 +38,6 @@ app.use(errorHandler);
 app.listen(config.PORT, () => {
   console.log(`[⚡] Server Is Running on http://localhost:${config.PORT}`);
 });
+
+
+export default app;
