@@ -4,7 +4,10 @@
   "description": "CARE Backend.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts",
+    "vercel-build": "prisma generate"
   },
   "repository": {
     "type": "git",

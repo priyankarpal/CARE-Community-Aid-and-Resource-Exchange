@@ -119,9 +119,15 @@ export const verifyOTP = async (req: Request, res: Response) => {
   const { userId } = req.params;
   if (!token || typeof token !== "string")
     return res.status(400).send("Token not provided or invalid");
+  let email = userId;
+  const userData = await prisma.user.findUnique({ where: { email } });
+  console.log(userData);
+  if(!userData){
+    return res.status(400).json({ success: false, message: "User Not Found!" });
+  }  
 
   const verificationToken = await prisma.oTP.findFirst({
-    where: { otp: token, authorId: userId },
+    where: { otp: token, authorId: userData.id },
   });
   if (!verificationToken)
     return res.status(404).json({ success: false, message: "Invalid token" });
